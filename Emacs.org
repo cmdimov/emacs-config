@@ -1,5 +1,5 @@
 #+title My Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle /home/ceco/.emacs :mkdirp yes
 
 * Enable package repositories
   Enable *MELPA*.
