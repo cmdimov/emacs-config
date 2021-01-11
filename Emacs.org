@@ -1,4 +1,6 @@
-#+title My Emacs Configuration
+#+title: My Emacs Configuration
+#+author: Cvetomir Dimov
+#+date: 2020-01-10
 #+PROPERTY: header-args:emacs-lisp :tangle /home/ceco/.emacs :mkdirp yes
 
 * Enable package repositories
@@ -235,7 +237,7 @@
 ** Racket
 #+begin_src emacs-lisp
 
-(use-package racket
+(use-package racket-mode
 
 )
 
@@ -329,6 +331,18 @@
 
   #+end_src
 
+** Org journal
+#+begin_src emacs-lisp
+
+(use-package org-journal
+  :ensure t
+  :defer t
+  :config
+  (setq org-journal-dir "~/Documents/diary/"
+        org-jounral-find-file 'find-file
+        org-journal-file-type 'yearly))
+
+#+end_src
 ** Org-babel
   Load languages that I use in org-babel.
   #+begin_src emacs-lisp
@@ -341,6 +355,35 @@
     (python . t)
     (R . t)))
   #+end_src
+** Org-tree-slide
+#+begin_src emacs-lisp
+(defun presentation-setup ()
+  (setq text-scale-mode-amount 2)
+  (org-display-inline-images)
+  (text-scale-mode 1))
+
+(defun presentation-end ()
+   (text-scale-mode 0))
+   
+(use-package org-tree-slide
+  :hook ((org-tree-slide-play . presentation-setup)
+         (org-tree-slide-stop . presentation-end))
+  :custom
+  (org-tree-slide-in-effect t)
+  (org-tree-slide-activate-message "Presentation started")
+  (org-tree-slide-deactivate-message "Presentation finished")
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " // ")
+  (org-image-actual-width nil))
+  
+(with-eval-after-load "org-tree-slide"
+  (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f11>") 'org-tree-slide-content))
+
+(global-set-key (kbd "<f8>") 'org-tree-slide-mode)
+(global-set-key (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)
+#+end_src
 * OS
 ** Terminal 
    Set default shell in *term-mode*.
@@ -434,10 +477,15 @@
 - light gray used at many places needs to be slightly darker; right now it is difficult to see tables, comments and a lot of code
 - some parts from doom-modeline (such as segment showing mode; suggestions and so on) need to be integrated into the nano-modeline
 - org document titles need to be larger and bold
+- Currently, all font is bold - this needs to change; bold font needs to look different
+- currently, italic font is simply unbolded - it needs to actually look italic
+- in org-tree-slide countdown doesn't show time in modeline
+- in org-tree-slide, title is not large enough
 ** Bindings
 - swtich between windows with SPACE + 1/2/3...
 - a single shortcut (C + b maybe) to list all buffers
 - a simple shortcut for moving between buffers
 ** Behavior
 - creating a new line in a list adds a list item
+  
   
