@@ -280,6 +280,18 @@
    #+end_src
 
 ** Projectile 
+
+** Graphviz
+#+begin_src emacs-lisp
+
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 4))
+  
+;(use-package company-graphviz-dot
+;  )
+#+end_src
 * Org-mode
 ** General org setup
    #+begin_src emacs-lisp
@@ -314,6 +326,7 @@
 (add-to-list 'org-structure-template-alist '("R" . "src R"))
 (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("dt" . "src dot"))
 
 #+end_src
 
@@ -349,10 +362,12 @@
   (org-babel-do-load-languages
   'org-babel-load-languages
   '((emacs-lisp . t)
-    ;(lisp . t)
+    (lisp . t)
     ;(clojure . t)
     ;(scheme . t)
     (python . t)
+    (dot . t)
+    (ditaa . t)
     (R . t)))
   #+end_src
 ** Org-tree-slide
