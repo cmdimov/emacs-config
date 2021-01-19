@@ -62,7 +62,7 @@
 
   ;; Nano counsel configuration (optional)
   ;; Needs "counsel" package to be installed (M-x: package-install)
-  (require 'nano-counsel)
+;;  (require 'nano-counsel)
 
   (add-hook 'prog-mode-hook (lambda () (display-line-numbers-mode 1)))
   #+end_src
@@ -327,7 +327,7 @@
 (add-to-list 'org-structure-template-alist '("cj" . "src clojure"))
 (add-to-list 'org-structure-template-alist '("py" . "src python"))
 (add-to-list 'org-structure-template-alist '("dt" . "src dot"))
-
+;(add-to-list 'org-structure-template-alist '("da" . "src ditaa"))
 #+end_src
 
 ** Auto-tangle emacs configuration
